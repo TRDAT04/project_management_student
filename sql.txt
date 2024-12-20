@@ -1,0 +1,233 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Nov 30, 2024 at 05:20 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `qlsinhvien`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dangkymonhoc`
+--
+
+CREATE TABLE `dangkymonhoc` (
+  `MaSoSV` varchar(10) NOT NULL,
+  `MaMon` varchar(10) NOT NULL,
+  `HocKy` varchar(10) NOT NULL,
+  `NamHoc` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hocphi`
+--
+
+CREATE TABLE `hocphi` (
+  `MaSoSV` varchar(10) NOT NULL,
+  `MaMon` varchar(10) NOT NULL,
+  `HocKy` varchar(10) NOT NULL,
+  `NamHoc` varchar(10) NOT NULL,
+  `SoTien` decimal(10,2) NOT NULL,
+  `TrangThai` enum('Da thanh toan','Chua thanh toan') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ketquahoctap`
+--
+
+CREATE TABLE `ketquahoctap` (
+  `MaSoSV` varchar(10) NOT NULL,
+  `MaMon` varchar(10) NOT NULL,
+  `HocKy` varchar(10) NOT NULL,
+  `NamHoc` varchar(10) NOT NULL,
+  `Diem` float(3,2) DEFAULT NULL CHECK (`Diem` >= 0 and `Diem` <= 10),
+  `TrangThai` enum('Pass','Fail') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `monhoc`
+--
+
+CREATE TABLE `monhoc` (
+  `MaMon` varchar(10) NOT NULL,
+  `TenMon` varchar(100) NOT NULL,
+  `SoTinChi` int(11) NOT NULL,
+  `GiangVien` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `monhoc`
+--
+
+INSERT INTO `monhoc` (`MaMon`, `TenMon`, `SoTinChi`, `GiangVien`) VALUES
+('CTDL', 'CTDL & GT', 3, 'Hoàng văn chiến'),
+('KT0X2', 'Kinh tế xây dựng', 4, 'Nguyễn Hoàng Anh'),
+('LX3D4', 'Thương mại điện tử', 3, 'Trần văn tuấn');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sinhvien`
+--
+
+CREATE TABLE `sinhvien` (
+  `MaSoSV` varchar(10) NOT NULL,
+  `HoTen` varchar(100) NOT NULL,
+  `NgaySinh` date NOT NULL,
+  `GioiTinh` enum('Nam','Nữ','Khác') NOT NULL,
+  `QueQuan` varchar(100) DEFAULT NULL,
+  `Email` varchar(100) NOT NULL,
+  `SoDienThoai` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `sinhvien`
+--
+
+INSERT INTO `sinhvien` (`MaSoSV`, `HoTen`, `NgaySinh`, `GioiTinh`, `QueQuan`, `Email`, `SoDienThoai`) VALUES
+('sv001', 'Trương thành đạt', '2004-12-22', 'Nam', 'Nghi Lộc', 'ttuongdat@gmail.com', '0962204465'),
+('sv002', 'Nguyễn Công Minh', '2004-02-02', 'Nữ', 'hải dương', 'lickteig_cha@hotmail.com', '0929815807');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'ttuongdat@gmail.com', '123', 'Truong thanh dat', '2024-11-18 19:04:49', '2024-11-18 19:30:39');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `dangkymonhoc`
+--
+ALTER TABLE `dangkymonhoc`
+  ADD PRIMARY KEY (`MaSoSV`,`MaMon`,`HocKy`,`NamHoc`),
+  ADD KEY `MaMon` (`MaMon`);
+
+--
+-- Indexes for table `hocphi`
+--
+ALTER TABLE `hocphi`
+  ADD PRIMARY KEY (`MaSoSV`,`MaMon`,`HocKy`,`NamHoc`),
+  ADD KEY `MaMon` (`MaMon`);
+
+--
+-- Indexes for table `ketquahoctap`
+--
+ALTER TABLE `ketquahoctap`
+  ADD PRIMARY KEY (`MaSoSV`,`MaMon`,`HocKy`,`NamHoc`),
+  ADD KEY `MaMon` (`MaMon`);
+
+--
+-- Indexes for table `monhoc`
+--
+ALTER TABLE `monhoc`
+  ADD PRIMARY KEY (`MaMon`);
+
+--
+-- Indexes for table `sinhvien`
+--
+ALTER TABLE `sinhvien`
+  ADD PRIMARY KEY (`MaSoSV`),
+  ADD UNIQUE KEY `Email` (`Email`),
+  ADD UNIQUE KEY `SoDienThoai` (`SoDienThoai`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dangkymonhoc`
+--
+ALTER TABLE `dangkymonhoc`
+  ADD CONSTRAINT `dangkymonhoc_ibfk_1` FOREIGN KEY (`MaSoSV`) REFERENCES `sinhvien` (`MaSoSV`) ON DELETE CASCADE,
+  ADD CONSTRAINT `dangkymonhoc_ibfk_2` FOREIGN KEY (`MaMon`) REFERENCES `monhoc` (`MaMon`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hocphi`
+--
+ALTER TABLE `hocphi`
+  ADD CONSTRAINT `hocphi_ibfk_1` FOREIGN KEY (`MaSoSV`) REFERENCES `sinhvien` (`MaSoSV`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hocphi_ibfk_2` FOREIGN KEY (`MaMon`) REFERENCES `monhoc` (`MaMon`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `ketquahoctap`
+--
+ALTER TABLE `ketquahoctap`
+  ADD CONSTRAINT `ketquahoctap_ibfk_1` FOREIGN KEY (`MaSoSV`) REFERENCES `sinhvien` (`MaSoSV`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ketquahoctap_ibfk_2` FOREIGN KEY (`MaMon`) REFERENCES `monhoc` (`MaMon`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+//09/12/2024 
+CREATE TABLE `HocPhiTinChi` (
+  `HocKy` varchar(10) NOT NULL,
+  `NamHoc` varchar(10) NOT NULL,
+  `GiaTinChi` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`HocKy`, `NamHoc`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `hocphi`
+  DROP COLUMN `SoTien`;
+
+ALTER TABLE `hocphi`
+  ADD CONSTRAINT `hocphi_ibfk_3` FOREIGN KEY (`HocKy`, `NamHoc`) REFERENCES `HocPhiTinChi` (`HocKy`, `NamHoc`) ON DELETE CASCADE;

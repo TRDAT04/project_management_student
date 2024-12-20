@@ -1,0 +1,120 @@
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+/* Header */
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 15px 20px;
+  width: 100%; /* Đảm bảo header chiếm toàn bộ chiều ngang */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Tùy chọn: thêm bóng cho header */
+  z-index: 10; /* Đảm bảo header luôn trên các phần tử khác */
+}
+
+.header .logo {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0; /* Reset mọi margin mặc định */
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0; /* Reset margin của ul */
+  padding: 0; /* Reset padding của ul */
+}
+
+.nav ul li {
+  list-style: none;
+}
+
+.nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.nav ul li a:hover {
+  text-decoration: none;
+  background-color: #0056b3; /* Thay đổi màu nền khi hover */
+  border-radius: 4px;
+}
+
+/* Layout container */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 120px); /* Header + Footer height */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #343a40;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+}
+
+.sidebar ul li a:hover {
+  background-color: #495057;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+.footer {
+  width: 100%; /* Đảm bảo footer chiếm toàn bộ chiều ngang */
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  position: relative; /* Đảm bảo footer nằm dưới cùng khi nội dung dài */
+  /* bottom: 0;
+  left: 0; */
+  z-index: 10; /* Đảm bảo footer không bị che bởi phần tử khác */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Thêm bóng cho footer (tùy chọn) */
+}
+.footer p {
+  margin: 0; /* Reset mọi margin mặc định */
+}
